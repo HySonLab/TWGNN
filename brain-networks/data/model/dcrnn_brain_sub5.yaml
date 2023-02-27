@@ -1,0 +1,42 @@
+---
+base_dir: data/model
+log_level: INFO
+data:
+  name: ecg_sub5
+  batch_size: 64
+  dataset_dir: data/ECG_sub5
+  test_batch_size: 64
+  val_batch_size: 64
+  graph_pkl_filename: data/sensor_graph/adj_mx_brain_sub5.pkl
+
+model:
+  cl_decay_steps: 2000
+  filter_type: wavelet
+  how: 'baseline' # learnable or baseline mmf
+  wavelet_name: data/ECG_sub5/wavelets/baseline/adj_mx_brain_sub5.baseline.L.50.dim.66
+  horizon: 10
+  input_dim: 1
+  l1_decay: 0
+  max_diffusion_step: 1
+  num_nodes: 116
+  num_rnn_layers: 1
+  output_dim: 1
+  rnn_units: 64
+  seq_len: 10
+  use_curriculum_learning: true
+
+train:
+  base_lr: 0.01
+  dropout: 0.1
+  epoch: 0
+  epochs: 100
+  epsilon: 1.0e-3
+  global_step: 0
+  lr_decay_ratio: 0.1
+  max_grad_norm: 5
+  max_to_keep: 100
+  min_learning_rate: 2.0e-06
+  optimizer: adam
+  patience: 50
+  steps: [20, 30, 40, 50]
+  test_every_n_epochs: 1
